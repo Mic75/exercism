@@ -174,3 +174,8 @@ coffeescript/*/*.js.map
 # =========================
 CMakeLists.txt
 testCaseCollection.xml
+
+# =========================
+# Mic
+# =========================
+*.csproj
