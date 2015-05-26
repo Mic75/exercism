@@ -180,3 +180,5 @@ testCaseCollection.xml
 # =========================
 *.csproj
 exercism.exe
+*.sln
+package.config
