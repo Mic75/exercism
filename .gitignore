@@ -182,3 +182,5 @@ testCaseCollection.xml
 exercism.exe
 *.sln
 package.config
+*/Properties
+*.config
