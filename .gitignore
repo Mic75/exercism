@@ -179,3 +179,4 @@ testCaseCollection.xml
 # Mic
 # =========================
 *.csproj
+exercism.exe
