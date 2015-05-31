@@ -22,8 +22,6 @@
         }
     }
 
-
-
     return {
         verse: function (verse_num) {
             var verse = "I know an old lady who swallowed a " + verses[verse_num - 1].animal + ".\n";
@@ -36,6 +34,13 @@
                 verse += "I don't know why she swallowed the fly. Perhaps she'll die.\n";
             }
             return verse;
+        },
+        verses: function (from, to) {
+            var verses = ""
+            for (var i = from; i <= to; i++) {
+                verses += this.verse(i) + "\n";
+            }
+            return verses;
         }
     }
 
