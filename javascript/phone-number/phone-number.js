@@ -26,4 +26,12 @@ PhoneNumber.prototype.number = function () {
     return this.phone_number;
 };
 
+PhoneNumber.prototype.areaCode = function () {
+    return this.phone_number.substr(0, 3);
+}
+
+PhoneNumber.prototype.toString = function () {
+   return  this.phone_number.replace(/(^\d{3})(\d{3})(\d{4})/g, "($1) $2-$3");
+}
+
 module.exports = PhoneNumber;
