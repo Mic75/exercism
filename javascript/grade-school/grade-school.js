@@ -2,6 +2,16 @@
     this.school_roster = {};
 };
 
+Array.prototype.sorted_insert = function (elem) {
+    for (var i = 0, l = this.length ; i < l ; i++) {
+        if (elem < this[i]) {
+            this.splice(i, 0, elem);
+            return;
+        }
+    }
+    this.push(elem);
+}
+
 School.prototype = {
     roster: function () {
         return this.school_roster;
@@ -12,17 +22,11 @@ School.prototype = {
             this.school_roster[grade] = [student];
         }
         else {
-            this.school_roster[grade].push(student);
+            this.school_roster[grade].sorted_insert(student);
         }
     },
     grade: function (grade) {
-        var enrolled = this.school_roster[grade];
-        if (typeof enrolled !== "undefined" ){
-            return enrolled.sort();
-        }
-        else {
-            return [];
-        }
+        return this.school_roster[grade] || [];
     }
 };
 
