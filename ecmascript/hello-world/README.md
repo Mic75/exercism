@@ -1,4 +1,4 @@
-# Hello World
+````````# Hello World
 
 Write a function that greets the user by name, or by saying "Hello, World!" if no name is given.
 
@@ -6,7 +6,7 @@ Write a function that greets the user by name, or by saying "Hello, World!" if n
 the traditional first program for beginning programming in a new language.
 
 **Note:** You can skip this exercise by running:
-
+``
     exercism skip $TRACK_ID hello-world
 
 ## Specification
@@ -15,7 +15,7 @@ Write a `Hello World!` function that can greet someone given their name.  The
 function should return the appropriate greeting.
 
 For an input of "Alice", the response should be "Hello, Alice!".
-
+````
 If a name is not given, the response should be "Hello, World!"
 
 ## Test-Driven Development
