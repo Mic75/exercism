@@ -184,3 +184,4 @@ exercism.exe
 package.config
 */Properties
 *.config
+.idea
