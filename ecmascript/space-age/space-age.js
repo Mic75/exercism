@@ -17,7 +17,7 @@ class SpaceAge {
     this.seconds = seconds;
 
     Object.entries(orbitalPeriods).forEach(([planet, period]) => {
-      this[`on${planet}`] = () => parseFloat(Number(seconds / period).toFixed(2));
+      this[`on${planet}`] = () => Number((seconds / period).toFixed(2));
     });
   }
 }
