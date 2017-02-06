@@ -14,10 +14,6 @@ class Clock {
     return this;
   }
 
-  get minutes() {
-    return this._minutesTotal;
-  }
-
   equals(clock) {
     return this.toString() === clock.toString();
   }
