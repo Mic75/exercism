@@ -14,7 +14,7 @@ export default class {
   }
 
   grade(grade) {
-    return this._roster[grade] ? this._roster[grade].slice() : [];
+    return this._roster[grade] ? [...this._roster[grade]] : [];
   }
 
 }
