@@ -6,37 +6,37 @@ describe('Word Problem', () => {
     expect(new WordProblem(question).answer()).toEqual(2);
   });
 
-  xtest('add 2', () => {
+  test('add 2', () => {
     const question = 'What is 53 plus 2?';
     expect(new WordProblem(question).answer()).toEqual(55);
   });
 
-  xtest('add negative numbers', () => {
+  test('add negative numbers', () => {
     const question = 'What is -1 plus -10?';
     expect(new WordProblem(question).answer()).toEqual(-11);
   });
 
-  xtest('add more digits', () => {
+  test('add more digits', () => {
     const question = 'What is 123 plus 45678?';
     expect(new WordProblem(question).answer()).toEqual(45801);
   });
 
-  xtest('subtract', () => {
+  test('subtract', () => {
     const question = 'What is 4 minus -12?';
     expect(new WordProblem(question).answer()).toEqual(16);
   });
 
-  xtest('multiply', () => {
+  test('multiply', () => {
     const question = 'What is -3 multiplied by 25?';
     expect(new WordProblem(question).answer()).toEqual(-75);
   });
 
-  xtest('divide', () => {
+  test('divide', () => {
     const question = 'What is 33 divided by -3?';
     expect(new WordProblem(question).answer()).toEqual(-11);
   });
 
-  xtest('add twice', () => {
+  test('add twice', () => {
     const question = 'What is 1 plus 1 plus 1?';
     expect(new WordProblem(question).answer()).toEqual(3);
   });
