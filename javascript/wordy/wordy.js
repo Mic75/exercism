@@ -12,14 +12,21 @@ class WordProblem {
     };
 
     this._operators = /(plus|minus|multiplied by|divided by)/g;
+    this._unsupportedOperators = /(cubed)/g;
   }
 
   answer() {
     let operands = this.question.match(this._operandsRegEx) || [];
     operands = operands.map(o => parseInt(o));
-    let operators = this.question.match(this._operators) || [];
 
-    if (operators.length === 0 || operands.length < 2){
+    const operators = this.question.match(this._operators) || [];
+    const unsupportedOperators = this.question.match(this._unsupportedOperators);
+
+    if (operators.length === 0 && operands.length === 1 && this._unsupportedOperators === null){
+      return operands[0];
+    }
+
+    if (unsupportedOperators !== null || operands.length === 0){
       throw new ArgumentError();
     }
 
