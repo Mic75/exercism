@@ -3,28 +3,32 @@ class ArgumentError extends Error {}
 class WordProblem {
   constructor(question){
     this.question = question;
-    this._expressionRegEx = /(-?\d+) (plus|minus|multiplied by|divided by) (-?\d+)/;
+    this._operandsRegEx = /-?\d+/g;
+    this._operations = {
+      "plus": (a,b) => a + b,
+      "minus": (a, b) => a - b,
+      "multiplied by": (a,b) => a*b,
+      "divided by": (a,b) => a/b
+    };
+
+    this._operators = /(plus|minus|multiplied by|divided by)/g;
   }
 
   answer() {
-    let matches = this.question.match(this._expressionRegEx);
-    return this[`_${matches[2]}`](parseInt(matches[1]), parseInt(matches[3]));
-  }
+    let operands = this.question.match(this._operandsRegEx) || [];
+    operands = operands.map(o => parseInt(o));
+    let operators = this.question.match(this._operators) || [];
 
-  _plus(a,b) {
-    return a + b;
-  }
+    if (operators.length === 0 || operands.length < 2){
+      throw new ArgumentError();
+    }
 
-  _minus(a,b) {
-    return a - b;
-  }
+    let result = this._operations[operators[0]](operands[0], operands[1]);
 
-  ["_multiplied by"](a,b) {
-    return a * b;
-  }
-
-  ["_divided by"](a,b) {
-    return a / b;
+    for (let i=2 ; i < operands.length; i++){
+      result = this._operations[operators[i-1]](result, operands[i]);
+    }
+    return result;
   }
 }
 

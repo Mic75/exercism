@@ -41,44 +41,44 @@ describe('Word Problem', () => {
     expect(new WordProblem(question).answer()).toEqual(3);
   });
 
-  xtest('add then subtract', () => {
+  test('add then subtract', () => {
     const question = 'What is 1 plus 5 minus -2?';
     expect(new WordProblem(question).answer()).toEqual(8);
   });
 
-  xtest('subtract twice', () => {
+  test('subtract twice', () => {
     const question = 'What is 20 minus 4 minus 13?';
     expect(new WordProblem(question).answer()).toEqual(3);
   });
 
-  xtest('subtract then add', () => {
+  test('subtract then add', () => {
     const question = 'What is 17 minus 6 plus 3?';
     expect(new WordProblem(question).answer()).toEqual(14);
   });
 
-  xtest('multiply twice', () => {
+  test('multiply twice', () => {
     const question = 'What is 2 multiplied by -2 multiplied by 3?';
     expect(new WordProblem(question).answer()).toEqual(-12);
   });
 
-  xtest('add then multiply', () => {
+  test('add then multiply', () => {
     const question = 'What is -3 plus 7 multiplied by -2?';
     expect(new WordProblem(question).answer()).toEqual(-8);
   });
 
-  xtest('divide twice', () => {
+  test('divide twice', () => {
     const question = 'What is -12 divided by 2 divided by -3?';
     expect(new WordProblem(question).answer()).toEqual(2);
   });
 
-  xtest('too advanced', () => {
+  test('too advanced', () => {
     const question = 'What is 53 cubed?';
     const problem = new WordProblem(question);
 
     expect(problem.answer.bind(problem)).toThrow(new ArgumentError());
   });
 
-  xtest('irrelevant', () => {
+  test('irrelevant', () => {
     const question = 'Who is the president of the United States?';
     const problem = new WordProblem(question);
 
