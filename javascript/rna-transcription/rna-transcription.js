@@ -1,16 +1,18 @@
-﻿var transcriptor = {
-    'G': 'C',
-    'C': 'G',
-    'T': 'A',
-    'A': 'U'
-};
+const RNA_TO_DNA = new Map([
+  ['g', 'c'],
+  ['c', 'g'],
+  ['t', 'a'],
+  ['a', 'u']
+]);
 
-function toRNA(dna) {
-    var rna_strand = "", dna_length;
-    for (i = 0, dna_length = dna.length; i < dna_length ; i++) {
-        rna_strand += transcriptor[dna[i]];
+export function toRna(strand) {
+  let result = '';
+  for (let nucleotide of strand) {
+    let dna_nucleotide = RNA_TO_DNA.get(nucleotide.toLowerCase());
+    if (dna_nucleotide === undefined) {
+      throw Error('Invalid input DNA.');
     }
-    return rna_strand;
+    result += dna_nucleotide;
+  }
+  return result.toUpperCase();
 }
-
-module.exports = toRNA;
