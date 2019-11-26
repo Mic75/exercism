@@ -1,18 +1,7 @@
-const RNA_TO_DNA = new Map([
-  ['g', 'c'],
-  ['c', 'g'],
-  ['t', 'a'],
-  ['a', 'u']
-]);
+const RNA_TO_DNA = { G: 'C', C: 'G', T: 'A', A: 'U' };
 
 export function toRna(strand) {
-  let result = '';
-  for (let nucleotide of strand) {
-    let dna_nucleotide = RNA_TO_DNA.get(nucleotide.toLowerCase());
-    if (dna_nucleotide === undefined) {
-      throw Error('Invalid input DNA.');
-    }
-    result += dna_nucleotide;
-  }
-  return result.toUpperCase();
+  return strand.split("")
+    .map(nucleotide => RNA_TO_DNA[nucleotide])
+    .join('');
 }
