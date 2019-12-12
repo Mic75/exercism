@@ -5,19 +5,23 @@ class WordProblem {
     this.question = question;
   }
 
+  _isInvalid(){
+    return !_validationRegex.test(this.question);
+  }
+
   answer() {
+
+    if (this._isInvalid()){
+      throw new ArgumentError();
+    }
+
     let operands = this.question.match(_operandsRegEx) || [];
     operands = operands.map(o => parseInt(o, 10));
 
     const operators = this.question.match(_operators) || [];
-    const unsupportedOperators = this.question.match(_unsupportedOperators);
 
-    if (operators.length === 0 && operands.length === 1 && _unsupportedOperators === null){
+    if (operators.length === 0 && operands.length === 1){
       return operands[0];
-    }
-
-    if (unsupportedOperators !== null || operands.length === 0){
-      throw new ArgumentError();
     }
 
     let result = _operations[operators[0]](operands[0], operands[1]);
@@ -29,6 +33,8 @@ class WordProblem {
   }
 }
 
+const _validationRegex = /What is -?\d+ ((plus|minus|multiplied by|divided by) -?\d+\s?)+\?/;
+
 const _operandsRegEx = /-?\d+/g;
 
 const _operations = {
@@ -37,8 +43,7 @@ const _operations = {
   "multiplied by": (a,b) => a*b,
   "divided by": (a,b) => a/b
 };
-const _operators = /(plus|minus|multiplied by|divided by)/g;
 
-const _unsupportedOperators = /(cubed)/g;
+const _operators = /(plus|minus|multiplied by|divided by)/g;
 
 export { ArgumentError, WordProblem }

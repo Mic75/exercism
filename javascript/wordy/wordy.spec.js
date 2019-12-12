@@ -84,4 +84,11 @@ describe('Word Problem', () => {
 
     expect(problem.answer.bind(problem)).toThrow(ArgumentError);
   });
+
+  test('bad formed', () => {
+    const question = 'What is 5 plus peanut butter 2?';
+    const problem = new WordProblem(question);
+
+    expect(problem.answer.bind(problem)).toThrow(ArgumentError);
+  });
 });
