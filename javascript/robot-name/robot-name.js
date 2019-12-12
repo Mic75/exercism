@@ -1,29 +1,55 @@
-﻿module.exports = (function () {
+export class Robot {
 
-    function get_random_int(min, max) {
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
+  constructor(){
+    this[_name] = giveUniqueName();
+  }
 
-    function get_bigram() {
-        return String.fromCharCode(get_random_int(65, 91),get_random_int(65, 91));
-    }
+  reset(){
+    //usedNames.delete(this.name);
+    this[_name] = giveUniqueName();
+  }
 
-    function get_serial() {
-        return new Intl.NumberFormat('en-US', { minimumIntegerDigits: 3 }).format(get_random_int(0, 1000));
-    }
+  get name(){
+    return this[_name];
+  }
 
-    function get_new_name() {
-        return get_bigram() + get_serial();
-    }
+}
 
-    var Robot = function () {
-        this.name = get_new_name();
-    };
+// PRIVACY
 
-    Robot.prototype = {
-        reset: function () {
-            this.name = get_new_name();
-        }
-    };
-    return Robot;
-})();
+const _name = Symbol('name');
+const _usedNames = new Set();
+
+function getRandomIntInclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+}
+
+function prefixCodes() {
+  return [
+    getRandomIntInclusive(65,90),
+    getRandomIntInclusive(65,90)
+  ];
+}
+
+function prefix(){
+  return String.fromCharCode(...prefixCodes());
+}
+
+function suffix(){
+  return Number(getRandomIntInclusive(0,999)).toString().padStart(3, '0');
+}
+
+function giveUniqueName() {
+  let name;
+
+  do {
+    name = prefix() + suffix();
+  } while(_usedNames.has(name));
+
+  _usedNames.add(name);
+  return name;
+}
+
+Robot.releaseNames = () => {
+  _usedNames.clear();
+};

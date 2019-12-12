@@ -1,33 +1,19 @@
-﻿var School = function () {
-    this.school_roster = {};
-};
+export class GradeSchool {
 
-Array.prototype.sorted_insert = function (elem) {
-    for (var i = 0, l = this.length ; i < l ; i++) {
-        if (elem < this[i]) {
-            this.splice(i, 0, elem);
-            return;
-        }
-    }
-    this.push(elem);
+  constructor(){
+    this._roster = {};
+  }
+
+  roster() {
+    return  JSON.parse(JSON.stringify(this._roster));
+  }
+
+  add(studentName, grade) {
+    this._roster[grade] = [studentName].concat(this._roster[grade] || []).sort();
+  }
+
+  grade(grade) {
+    return this._roster[grade] ? [...this._roster[grade]] : [];
+  }
+
 }
-
-School.prototype = {
-    roster: function () {
-        return this.school_roster;
-    },
-    add: function (student, grade) {
-        students_in_grade = this.school_roster[grade];
-        if (typeof students_in_grade === "undefined") {
-            this.school_roster[grade] = [student];
-        }
-        else {
-            this.school_roster[grade].sorted_insert(student);
-        }
-    },
-    grade: function (grade) {
-        return this.school_roster[grade] || [];
-    }
-};
-
-module.exports = School;
