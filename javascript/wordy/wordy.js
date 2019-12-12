@@ -33,10 +33,6 @@ class WordProblem {
   }
 }
 
-const _validationRegex = /What is -?\d+ ((plus|minus|multiplied by|divided by) -?\d+\s?)+\?/;
-
-const _operandsRegEx = /-?\d+/g;
-
 const _operations = {
   "plus": (a,b) => a + b,
   "minus": (a, b) => a - b,
@@ -44,6 +40,16 @@ const _operations = {
   "divided by": (a,b) => a/b
 };
 
-const _operators = /(plus|minus|multiplied by|divided by)/g;
+function buildOperatorCaptureGroup(operators){
+  return `(${operators.join('|')})`;
+}
+
+const operatorsCaptureGroup = buildOperatorCaptureGroup(Object.keys(_operations));
+
+const _validationRegex = RegExp(`What is -?\\d+ (${operatorsCaptureGroup} -?\\d+\\s?)+\\?`);
+
+const _operators = RegExp(operatorsCaptureGroup, 'g');
+
+const _operandsRegEx = /-?\d+/g;
 
 export { ArgumentError, WordProblem }
