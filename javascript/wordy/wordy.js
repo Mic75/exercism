@@ -24,9 +24,9 @@ class WordProblem {
       return operands[0];
     }
 
-    let result = _operations[operators[0]](operands[0], operands[1]);
+    let result = operands[0];
 
-    for (let i=2 ; i < operands.length; i++){
+    for (let i=1 ; i < operands.length; i++){
       result = _operations[operators[i-1]](result, operands[i]);
     }
     return result;
