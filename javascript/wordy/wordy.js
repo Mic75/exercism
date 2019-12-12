@@ -7,7 +7,7 @@ class WordProblem {
 
   answer() {
     let operands = this.question.match(_operandsRegEx) || [];
-    operands = operands.map(o => parseInt(o));
+    operands = operands.map(o => parseInt(o, 10));
 
     const operators = this.question.match(_operators) || [];
     const unsupportedOperators = this.question.match(_unsupportedOperators);
