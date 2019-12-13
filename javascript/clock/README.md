@@ -1,15 +1,10 @@
-# Word Count
+# Clock
 
-Given a phrase, count the occurrences of each word in that phrase.
+Implement a clock that handles times without dates.
 
-For example for the input `"olly olly in come free"`
+You should be able to add and subtract minutes to it.
 
-```text
-olly: 2
-in: 1
-come: 1
-free: 1
-```
+Two clocks that represent the same time should be equal to each other.
 
 ## Setup
 
@@ -41,7 +36,7 @@ Once you get a test passing, you can enable the next one by changing `xtest` to
 
 ## Source
 
-This is a classic toy problem, but we were reminded of it by seeing it in the Go Tour.
+Pairing session with Erin Drummond [https://twitter.com/ebdrummond](https://twitter.com/ebdrummond)
 
 ## Submitting Incomplete Solutions
 

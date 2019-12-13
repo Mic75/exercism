@@ -1,23 +1,21 @@
-
-function prepare_input(input) {
-    return input.replace(/[\n\t]/m, " ")
-                .replace(/\s+/, " ")
-                .split(" ");
+function prepareInput(input) {
+  return input.toLowerCase()
+    .replace(/[\n\t,\!\&@\$%\^:\.]/g, " ")
+    .replace(/'(\w{2,})'/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ");
 }
 
-var words = function (input) {
-    splitted_input = prepare_input(input),
-    word_count = splitted_input.length,
-    words_stats = {},
-    current_count = null;
+export function countWords(input) {
+  let splitInput = prepareInput(input);
+  let wordCount = splitInput.length;
+  let occurrences = {};
 
-    for (var i = 0; i < word_count ; i++) {
-        current_count = words_stats.hasOwnProperty( splitted_input[i] ) ? words_stats[ splitted_input[i] ] : 0;
-        words_stats[ splitted_input[i] ] = current_count === 0 ? 1 : current_count + 1;
-    }
-    return words_stats;
-
-};
-
-module.exports = words;
-
+  for (let i = 0; i < wordCount; i++) {
+    const word = splitInput[i];
+    const count = occurrences[word] || 0;
+    occurrences[word] = count + 1;
+  }
+  return occurrences;
+}
