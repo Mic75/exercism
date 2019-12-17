@@ -1,8 +1,7 @@
 function prepareInput(input) {
   return input.toLowerCase()
-    .replace(/[\n\t,\!\&@\$%\^:\.]/g, " ")
-    .replace(/'(\w{2,})'/g, "$1")
-    .match(/\S+/g);
+    .match(/['a-z0-9]+/g)
+    .map(word => word.replace(/^'(.*)'$/g, "$1"));
 }
 
 export function countWords(input) {
