@@ -1,6 +1,7 @@
 class RobotFactory {
 
   constructor(){
+    this.remaining = RobotFactory.CAPACITY;
     this._namesLUT = new Array(RobotFactory.CAPACITY);
     this._charLUT = {};
     for (let i= 65 ; i < 91; i++) {
@@ -10,7 +11,18 @@ class RobotFactory {
   }
 
   _index2Name(index) {
+    const suffix = (index % 1000).toString().padStart(3, "0");
+    index = index - index % 1000;
+    let prefix = "AA";
 
+    if (index > 0){
+      if (index < 25000) {
+        prefix = "A" + String.fromCharCode(Math.floor(index / 1000) + 65);
+      } else {
+        prefix = String.fromCharCode(Math.floor(index /25000) + 65) + String.fromCharCode(Math.floor((index % 25000) / 1000) + 65);
+      }
+    }
+    return prefix + suffix;
   }
 
   _name2Index(name) {
@@ -25,6 +37,8 @@ class RobotFactory {
   _pickup(index) {
     this._latest = index; // save index
     this._namesLUT[index] = true; // flag index
+    this.remaining--;
+    console.log(this.remaining);
     return this._index2Name(index); // return name matching index
   }
 
@@ -34,8 +48,8 @@ class RobotFactory {
       return this._pickup(candidate);
     } else {
       for (let i=0 ; i < RobotFactory.CAPACITY ; i++) { // if consecutive or not available, iterate over LUT until good match found
-        if (this._namesLUT[candidate] === false && Math.abs(candidate - this._latest) > 1) {
-          return this._pickup(candidate);
+        if (this._namesLUT[i] === false && Math.abs(i - this._latest) > 1) {
+          return this._pickup(i);
         }
       }
     }
@@ -48,6 +62,7 @@ class RobotFactory {
 
   reset(){
     this._latest = -2;
+    this.remaining = RobotFactory.CAPACITY;
     for (let i=0 ; i < RobotFactory.CAPACITY ; i++){
       this._namesLUT[i] = false;
     }
@@ -57,7 +72,7 @@ class RobotFactory {
 RobotFactory.CAPACITY = 675000;
 
 let robotFactory = new RobotFactory();
-let _name = new Symbol();
+let _name = Symbol();
 
 export class Robot {
 
