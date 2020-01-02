@@ -2,18 +2,14 @@ export class NucleotideCounts {}
 
 NucleotideCounts.parse = function (dnaSequence)
 {
-  if (/[^ACGT]/.test(dnaSequence)){
-    throw Error('Invalid nucleotide in strand');
-  }
+  const nucleotidesCount = dnaSequence.split('').reduce((occurrences, nucleotide) => {
+    if (/[^ACGT]/.test(nucleotide)) {
+      throw Error('Invalid nucleotide in strand');
+    }
+    occurrences[nucleotide]++;
+    return occurrences;
+  }, {A: 0, C: 0, G: 0, T: 0});
 
-  const occurrences = {
-    A: 0,
-    C: 0,
-    G: 0,
-    T: 0
-  };
-
-  dnaSequence.split('').forEach((nucleotide) => occurrences[nucleotide]++);
-  return Object.values(occurrences).join(' ').trimEnd();
+  return Object.values(nucleotidesCount).join(' ');
 };
 
