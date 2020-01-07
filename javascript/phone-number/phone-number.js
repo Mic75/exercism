@@ -1,39 +1,29 @@
-﻿PhoneNumber = function (number) {
+﻿export class PhoneNumber {
 
-    function clean_number(number) {
-        var cleaned_num = number.replace(/[\(\)\.\s-]/g, "");
-        var wrong_number = "0000000000";
-
-        if (cleaned_num.length < 10 || cleaned_num.length > 11) {
-            return wrong_number;
-        }
-
-        if (cleaned_num.length === 11) {
-            if (cleaned_num[0] === "1") {
-                return cleaned_num.substr(1);
-            }
-            else {
-                return wrong_number;
-            }
-        }
-        return cleaned_num;
+    constructor(number) {
+        this.phone_number = this._cleanNumber(number);
     }
 
-    this.phone_number = clean_number(number);
-};
-
-PhoneNumber.prototype = {
-    number: function () {
-        return this.phone_number;
-    },
-
-    areaCode: function () {
-        return this.phone_number.substr(0, 3);
-    },
-
-    toString: function () {
-        return this.phone_number.replace(/(^\d{3})(\d{3})(\d{4})/g, "($1) $2-$3");
+    number() {
+       return this.phone_number;
     }
-};
 
-module.exports = PhoneNumber;
+    _cleanNumber(number){
+        try {
+            let cleanedNum = number.replace(/[\(\)\.\s-+]/g, "").match(/\d+/)[0];
+
+            if (cleanedNum.length === 11 && cleanedNum[0] === "1") {
+                cleanedNum = cleanedNum.substr(1);
+            }
+
+            if (cleanedNum.length === 10 && !/[0-1]/.test(cleanedNum[0]) && !/[0-1]/.test(cleanedNum[3])) {
+                return cleanedNum;
+            }
+
+            return null;
+        }
+        catch {
+            return null;
+        }
+    }
+}
